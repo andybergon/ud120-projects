@@ -10,11 +10,8 @@ def outlierCleaner(predictions, ages, net_worths):
         Return a list of tuples named cleaned_data where 
         each tuple is of the form (age, net_worth, error).
     """
-    
-    cleaned_data = []
+    cleaned_data = map(lambda x: (x[1], x[2], x[0] - x[2]),
+                       sorted(zip(predictions, ages, net_worths), key=lambda tup: tup[0] - tup[2], reverse=True)[
+                       int(len(predictions) * 0.1):])
 
-    ### your code goes here
-
-    
     return cleaned_data
-
